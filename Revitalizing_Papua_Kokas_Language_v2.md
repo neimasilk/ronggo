@@ -63,7 +63,7 @@ Where $d_k$ is the dimension of the keys. This mechanism is applied in parallel 
 The training process aims to minimize the Cross-Entropy Loss between the predicted probability distribution and the ground truth target tokens. For a target sequence $Y = (y_1, ..., y_T)$ given an input $X$, the loss function $\mathcal{L}$ is defined as:
 
 $$ 
-\mathcal{L} = - \sum_{t=1}^{T} \log P(y_t \mid y_{<t}, X; \theta) 
+\mathcal{L} = - \sum_{t=1}^{T} \log P(y_t \mid y_{1:t-1}, X; \theta) 
 $$ 
 
 Where $\theta$ represents the model parameters. By initializing $\theta$ with weights from `opus-mt-id-en`, the optimization process starts from a point of high linguistic competence in Indonesian, requiring fewer steps to converge on the Kokas translation task.
