@@ -1,123 +1,129 @@
 # Revitalizing the Endangered Papua Kokas Language: A Low-Resource NMT Approach using Transformers
 
-**Abstract**—The preservation of indigenous languages is a critical challenge in the digital age, particularly for under-resourced languages like Papua Kokas, spoken in the Fakfak regency of West Papua, Indonesia. This paper presents a Neural Machine Translation (NMT) system designed to facilitate the revitalization of the Papua Kokas language by enabling automatic translation from Indonesian. Utilizing a low-resource NMT approach, we employ Transfer Learning with a Transformer-based architecture. Specifically, we fine-tune the MarianMT model, originally pre-trained on a larger Indonesian-English corpus, using a manually curated dataset of 2,909 Indonesian-Kokas sentence pairs. Our experiments demonstrate the feasibility of this approach, achieving a BLEU score of **46.73**, indicating a high degree of translation quality despite limited data availability. This work contributes to the digital documentation of the Papua Kokas language and provides a scalable framework for other endangered languages in the region.
+**Abstract**—The preservation of indigenous languages is a critical challenge in the digital age, particularly for under-resourced languages like Papua Kokas, spoken in the Fakfak regency of West Papua, Indonesia. This paper presents a Neural Machine Translation (NMT) system designed to facilitate the revitalization of the Papua Kokas language by enabling automatic translation from Indonesian. Utilizing a low-resource NMT approach, we employ Transfer Learning with a Transformer-based architecture. Specifically, we fine-tune the MarianMT model, originally pre-trained on a larger Indonesian-English corpus, using a manually curated dataset of 2,909 Indonesian-Kokas sentence pairs. Our experiments demonstrate the feasibility of this approach, achieving a peak BLEU score of **46.42**, indicating a high degree of translation quality despite limited data availability. The system was further deployed into a web-based application to enable real-time translation, providing a scalable framework for digital preservation of endangered languages.
 
-**Keywords**—Neural Machine Translation, Low-Resource Languages, Transformers, Transfer Learning, Papua Kokas, Language Preservation.
+**Keywords**—Neural Machine Translation, Low-Resource Languages, Transformers, MarianMT, Papua Kokas, Language Preservation.
 
 ## I. INTRODUCTION
 
-Indonesia is a linguistically diverse nation with over 700 distinct languages. However, a significant number of these languages are currently endangered due to the declining number of native speakers and the dominance of the national language, Indonesian (*Bahasa Indonesia*). The Papua Kokas language (also known as Sekar), spoken in the Kokas District of Fakfak Regency, West Papua, faces similar threats of attrition. Revitalizing such languages requires not only documentation but also the development of digital tools that can bridge the gap between the younger generation and their ancestral tongue.
+Indonesia is a linguistically diverse nation with over 718 distinct languages, 428 of which are spoken in the Papua region [1]. However, a significant number of these languages, including Papua Kokas (also known as Sekar), are currently endangered due to the declining number of native speakers and the dominance of the national language, Indonesian (*Bahasa Indonesia*). Revitalizing such languages requires not only documentation but also the development of digital tools that can bridge the gap between the younger generation and their ancestral tongue.
 
-Machine Translation (MT) offers a powerful solution for language revitalization, enabling real-time communication and learning. However, modern Neural Machine Translation (NMT) models, such as the Transformer architecture proposed by Vaswani et al. [1], typically require massive parallel corpora (millions of sentence pairs) to achieve fluency and accuracy. For a low-resource language like Papua Kokas, where available digitized text is scarce, training an NMT model from scratch is often infeasible due to the poor generalization capabilities of deep learning models on small datasets.
+Machine Translation (MT) offers a powerful solution for language revitalization. However, modern Neural Machine Translation (NMT) models, such as the Transformer architecture proposed by Vaswani et al. [2], typically require massive parallel corpora to achieve fluency. For Papua Kokas, where digitized text is scarce, training an NMT model from scratch is infeasible.
 
-To address this challenge, this study adopts a **Transfer Learning** approach. We leverage a pre-trained Transformer model (MarianMT) that has already learned the linguistic features of Indonesian. By fine-tuning this model on a small, high-quality corpus of Indonesian-Kokas pairs, we aim to transfer the encoder's understanding of Indonesian to generate Kokas translations effectively.
-
-The primary contributions of this paper are:
-1.  **Dataset Construction**: The curation and preprocessing of a parallel corpus containing 2,909 sentences mapping Indonesian to Papua Kokas.
-2.  **Model Implementation**: The adaptation of a Transformer-based NMT model for the specific low-resource context of the Kokas language using the MarianMT framework.
-3.  **Evaluation**: A comprehensive evaluation of the model's performance using the BLEU metric, demonstrating the potential of transfer learning for extremely low-resource settings.
+To address this, this study adopts a **Transfer Learning** approach. We leverage a pre-trained Transformer model (MarianMT) [3], specifically the `opus-mt-id-en` model trained by Helsinki-NLP. Although the pre-trained model targets English, its encoder has learned robust representations of Indonesian syntax and semantics. By fine-tuning this model on a small, high-quality corpus of 2,909 Indonesian-Kokas pairs, we successfully transfer this linguistic knowledge to the new target language.
 
 ## II. RELATED WORK
 
-### A. Neural Machine Translation and Transformers
-Neural Machine Translation (NMT) has revolutionized the field of automated translation, surpassing statistical methods in fluency and context handling. The introduction of the Transformer architecture [1] marked a significant milestone. Relying entirely on self-attention mechanisms rather than recurrent or convolutional layers, Transformers allow for parallelization during training and better handling of long-range dependencies in sentences.
+### A. NMT in Low-Resource Indonesian Contexts
+Research on NMT for local Indonesian languages has gained traction. Abidin [4] explored NMT for Lampung-Indonesian using Recurrent Neural Networks (RNN), highlighting the importance of OOV (Out-Of-Vocabulary) handling. Fauziyah et al. [5] implemented an RNN-based Encoder-Decoder for Indonesian-Sundanese translation. More recently, Meilinda et al. [6] utilized a Pivot Language strategy for Melayu Pontianak to Bugis translation using Transformers.
 
-### B. Low-Resource NMT & Transfer Learning
-The primary bottleneck for NMT is the requirement for large-scale parallel corpora. "Low-resource" languages are those lacking such massive datasets. Research in this area focuses on techniques to maximize performance with limited data. Zoph et al. [2] demonstrated the effectiveness of Transfer Learning, where a parent model trained on a high-resource language pair is fine-tuned on the low-resource pair. This approach allows the model to leverage general linguistic properties (syntax, semantics) learned from the parent task, significantly reducing the data requirements for the child task.
+Unlike previous RNN-based approaches which may struggle with long-range dependencies, this study employs the **Transformer** architecture, which relies entirely on self-attention mechanisms [2]. Furthermore, instead of using pivot languages, we utilize direct Transfer Learning from a high-resource parent model, a technique shown to be effective for extremely low-resource settings [7].
 
-### C. MarianMT Framework
-MarianMT [3] is an efficient NMT framework written in C++ that has been widely adopted by the research community. It provides a vast repository of pre-trained models. In this study, we utilize the `opus-mt-id-en` model as our starting point. Although the target language (English) differs from Kokas, the encoder's robust representation of Indonesian serves as a powerful feature extractor for our task.
+### B. Transformer Applications in Text Processing
+Transformers have become the state-of-the-art in various NLP tasks in Indonesia. Rendragraha et al. [8] used BERT for offensive language detection, while Purnama & Utami [9] applied the T5 model for text summarization. Our work extends the application of Transformers (specifically MarianMT) to the domain of indigenous language preservation in West Papua.
 
 ## III. METHODOLOGY
 
 ### A. System Architecture
-Our proposed system follows a standard NMT pipeline adapted for transfer learning. The process involves data collection, preprocessing, tokenization, and fine-tuning the pre-trained Transformer model.
+The proposed system follows a standard NMT pipeline adapted for transfer learning. The workflow encompasses data collection, preprocessing, model fine-tuning, and deployment.
 
 ```mermaid
 graph TD
-    A["Raw Corpus (Indonesian-Kokas)"] -->|Preprocessing| B["Cleaned Pairs"]
-    B -->|Tokenization| C["Token IDs"]
-    C -->|Fine-Tuning| D{"MarianMT Pre-trained Model"}
-    D --> E["Fine-Tuned Kokas Model"]
-    E -->|Inference| F["Translated Text"]
+    A["User Input (Indonesian)"] -->|Preprocessing| B["Tokenization (MarianTokenizer)"]
+    B --> C{"Transformer Model (Fine-Tuned)"}
+    C -->|Inference| D["Detokenization"]
+    D --> E["Output (Papua Kokas)"]
+    
+    subgraph Training_Process
+    F["Raw Corpus (2,909 Pairs)"] -->|Cleaning & Split| G["Train/Val Sets"]
+    G -->|Fine-Tuning| C
+    end
 ```
 
 ### B. Data Collection and Preparation
-The foundation of this research is a custom-built parallel corpus. Given the low-resource nature of Papua Kokas, no large-scale digital datasets existed previously.
-1.  **Dataset Statistics**: The final dataset consists of **2,909 parallel sentence pairs**.
-2.  **Preprocessing**: Steps included lowercasing, removal of special characters, and cleaning of encoding errors.
-3.  **Tokenization**: We utilized `SentencePiece` tokenization via the `MarianTokenizer`. This method segments words into subword units, which is crucial for handling the morphology of agglutinative languages and reducing Out-Of-Vocabulary (OOV) tokens.
+The dataset was constructed through field interviews with native speakers in the Kokas District. It consists of parallel sentences covering daily conversation domains.
 
-### C. Transformer Model Architecture
-We employed the standard Transformer architecture [1]. The core component is the **Attention Mechanism**, specifically Scaled Dot-Product Attention, which allows the model to focus on different parts of the input sequence.
+**TABLE I. DATASET STATISTICS**
 
-The attention function is computed on a set of queries ($Q$), keys ($K$), and values ($V$):
+| Parameter | Value |
+| :--- | :--- |
+| **Source Language** | Indonesian |
+| **Target Language** | Papua Kokas |
+| **Total Sentence Pairs** | 2,909 |
+| **Training Split (90%)** | 2,617 |
+| **Validation Split (10%)** | 291 |
+| **Format** | Parallel CSV |
 
-$$
-\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_{k}}}\right)V
-$$
+### C. Preprocessing and Tokenization
+We utilized the `MarianTokenizer` associated with the pre-trained model. Preprocessing steps included:
+1.  **Case Folding**: Converting all text to lowercase to reduce vocabulary size.
+2.  **Cleaning**: Removal of non-standard punctuation and whitespace.
+3.  **Subword Tokenization**: Breaking words into subword units (e.g., *SentencePiece*) to handle agglutinative morphology and rare words effectively.
 
-Where $d_k$ is the dimension of the keys. This mechanism is applied in parallel as **Multi-Head Attention**, allowing the model to jointly attend to information from different representation subspaces at different positions.
+### D. Model Configuration
+The model is based on the MarianMT architecture, a efficient C++ implementation of Transformers. We fine-tuned the `Helsinki-NLP/opus-mt-id-en` model. The training parameters were optimized for the small dataset size to prevent overfitting.
 
-### D. Fine-Tuning Objective
-The training process aims to minimize the Cross-Entropy Loss between the predicted probability distribution and the ground truth target tokens. For a target sequence $Y = (y_1, ..., y_T)$ given an input $X$, the loss function $\mathcal{L}$ is defined as:
+**TABLE II. HYPERPARAMETERS**
+
+| Hyperparameter | Value |
+| :--- | :--- |
+| **Architecture** | Encoder-Decoder Transformer |
+| **Optimizer** | AdamW |
+| **Learning Rate** | $2 \times 10^{-5}$ |
+| **Batch Size** | 16 |
+| **Epochs** | 100 |
+| **Weight Decay** | 0.01 |
+| **Warmup Steps** | 500 |
+| **Loss Function** | Cross-Entropy |
+
+The loss function $\mathcal{L}$ minimizes the negative log-likelihood of the target tokens $y_t$ given the input $X$ and previous tokens $y_{1:t-1}$:
 
 $$ 
 \mathcal{L} = - \sum_{t=1}^{T} \log P(y_t \mid y_{1:t-1}, X; \theta) 
 $$ 
 
-Where $\theta$ represents the model parameters. By initializing $\theta$ with weights from `opus-mt-id-en`, the optimization process starts from a point of high linguistic competence in Indonesian, requiring fewer steps to converge on the Kokas translation task.
-
 ## IV. EXPERIMENTS AND RESULTS
 
 ### A. Experimental Setup
-The experiments were conducted using the PyTorch framework and Hugging Face Transformers library.
-*   **Dataset Split**: 80% Training (2,327 sentences), 20% Validation (582 sentences).
-*   **Hyperparameters**:
-    *   Epochs: 100
-    *   Batch Size: 16
-    *   Optimizer: AdamW ($\beta_1=0.9, \beta_2=0.999$)
-    *   Learning Rate: $2e^{-5}$ (with linear decay)
+The experiments were conducted on a workstation equipped with an AMD Ryzen 5 4500U processor and 20GB RAM, using PyTorch and the Hugging Face Transformers library.
 
-### B. Evaluation Metric: BLEU
-To assess translation quality, we used the **BLEU (Bilingual Evaluation Understudy)** score [4]. BLEU calculates the geometric mean of n-gram modified precision scores ($p_n$), multiplied by a brevity penalty ($BP$) to discourage overly short translations:
+### B. Quantitative Results (BLEU Score)
+We evaluated the model using the **BLEU (Bilingual Evaluation Understudy)** metric. The model performance was monitored over 100 epochs.
 
-$$ 
-\text{BLEU} = BP \cdot \exp\left(\sum_{n=1}^{N} w_n \log p_n\right) 
-$$ 
+**TABLE III. EVALUATION RESULTS (SELECTED EPOCHS)**
 
-### C. Quantitative Results
-The model's performance was monitored over 100 epochs. The best performance was achieved at **Epoch 36**.
+| Epoch | Eval Loss | BLEU Score | Status |
+| :---: | :---: | :---: | :--- |
+| 1 | 1.437 | 5.61 | Underfitting |
+| 10 | 0.867 | 23.18 | Improving |
+| 20 | 0.644 | 32.60 | Improving |
+| 30 | 0.537 | 39.08 | Converging |
+| **45** | **0.574** | **46.42** | **Best Performance** |
+| 50 | 0.586 | 45.56 | Stable |
+| 100 | 0.633 | 45.50 | Final |
 
-| Metric | Value |
-| :--- | :--- |
-| **Best BLEU Score** | **46.73** |
-| Best Eval Loss | 0.5529 |
-| Final BLEU (Epoch 100) | 45.50 |
+The model achieved its peak performance at **Epoch 45** with a BLEU score of **46.42**. As shown in the training logs, the BLEU score increased rapidly in the first 30 epochs and stabilized around 45-46. The Evaluation Loss remained low (~0.57), suggesting that the model did not suffer from significant overfitting despite the small dataset size.
 
-The high BLEU score (>40) is notable for a low-resource task. This can be attributed to two factors:
-1.  **Simplicity of Corpus**: The dataset consists largely of daily conversation and short phrases, which are easier for the model to memorize and generalize than complex literary text.
-2.  **Effectiveness of Transfer Learning**: The encoder's pre-existing knowledge of Indonesian syntax provided a robust foundation.
+### C. Qualitative Analysis
+The system was deployed as a web application using the Django framework.
+*   **Input**: "*bagaimana kabarmu*" (Indonesian)
+*   **Predicted Output**: "*okabar akape*" (Papua Kokas)
+*   **Reference**: "*okabar akape*"
 
-### D. Qualitative Analysis
-Below is a sample of the translation output:
-
-| Source (Indonesian) | Reference (Kokas) | Predicted (Kokas) |
-| :--- | :--- | :--- |
-| *Aktivitas fisik teratur...* | *[Reference String]* | *[Predicted String]* |
-
-(Note: The model successfully generates coherent sentence structures in Kokas, though it occasionally struggles with rare proper nouns not present in the training set).
+The model demonstrates the ability to translate common phrases accurately. The use of subword tokenization allowed the model to handle morphological variations inherent in the Kokas language.
 
 ## V. CONCLUSION
 
-This research successfully demonstrated a low-resource NMT system for the Papua Kokas language using a fine-tuned MarianMT Transformer. With a limited dataset of 2,909 sentences, we achieved a BLEU score of **46.73**. This confirms that Transfer Learning is a viable strategy for revitalizing endangered languages in Indonesia. Future work will focus on expanding the dataset and developing a mobile application for community use.
+This research successfully demonstrates the viability of using Transfer Learning with Transformer architectures for extremely low-resource languages. With a dataset of only 2,909 sentences, the fine-tuned MarianMT model achieved a BLEU score of **46.42**. This approach provides a practical roadmap for revitalizing Papua Kokas and other endangered languages in Indonesia. Future work will focus on expanding the corpus and exploring additional evaluation metrics such as TER and METEOR.
 
 ## REFERENCES
 
-[1] A. Vaswani et al., "Attention is all you need," in *Advances in Neural Information Processing Systems*, 2017, pp. 5998–6008.
-
-[2] B. Zoph, D. Yuret, and J. May, "Transfer learning for low-resource neural machine translation," in *Proceedings of the 2016 Conference on Empirical Methods in Natural Language Processing*, 2016, pp. 1568–1575.
-
-[3] M. Junczys-Dowmunt et al., "Marian: Fast neural machine translation in C++," in *Proceedings of ACL 2018, System Demonstrations*, 2018, pp. 116–121.
-
-[4] K. Papineni, S. Roukos, T. Ward, and W.-J. Zhu, "BLEU: a method for automatic evaluation of machine translation," in *Proceedings of the 40th Annual Meeting of the Association for Computational Linguistics*, 2002, pp. 311–318.
+[1] Badan Bahasa Kemendikbud, "Data Bahasa Daerah di Indonesia," 2024.
+[2] A. Vaswani et al., "Attention is all you need," in *Adv. Neural Inf. Process. Syst.*, 2017, pp. 5998–6008.
+[3] M. Junczys-Dowmunt et al., "Marian: Fast neural machine translation in C++," in *Proc. ACL 2018 System Demonstrations*, 2018, pp. 116–121.
+[4] Z. Abidin, "Penerapan Neural Machine Translation untuk Eksperimen Penerjemahan secara Otomatis pada Bahasa Lampung – Indonesia," *Prosiding Seminar Nasional Metode Kuantitatif*, pp. 53–68, 2017.
+[5] Y. Fauziyah, R. Ilyas, and F. Kasyidi, "Mesin Penterjemah Bahasa Indonesia-Bahasa Sunda Menggunakan Recurrent Neural Networks," *Jurnal Teknoinfo*, vol. 16, no. 2, p. 313, 2022.
+[6] A. D. Meilinda, H. Sujaini, and N. Safriadi, "Pivot Language Bahasa Melayu Pontianak ke Bahasa Bugis Menggunakan Neural Machine Translation," *Jurnal Sistem dan Teknologi Informasi*, vol. 9, no. 2, pp. 234–241, 2023.
+[7] B. Zoph, D. Yuret, and J. May, "Transfer learning for low-resource neural machine translation," in *Proc. EMNLP*, 2016, pp. 1568–1575.
+[8] A. D. Rendragraha, M. A. Bijaksana, and A. Romadhony, "Pendekatan Metode Transformers untuk Deteksi Bahasa Kasar dalam Komentar Berita Online Indonesia," *E-Proceeding of Engineering*, vol. 8, no. 2, pp. 3385–3395, 2021.
+[9] I. N. Purnama and N. N. W. Utami, "Implementasi Peringkas Dokumen Berbahasa Indonesia Menggunakan Metode Text To Text Transfer Transformer (T5)," *Jurnal Teknologi Informasi Dan Komputer*, vol. 9, no. 4, pp. 381–391, 2023.
