@@ -35,11 +35,11 @@ Our proposed system follows a standard NMT pipeline adapted for transfer learnin
 
 ```mermaid
 graph TD
-    A[Raw Corpus (Indonesian-Kokas)] -->|Preprocessing| B[Cleaned Pairs]
-    B -->|Tokenization| C[Token IDs]
-    C -->|Fine-Tuning| D{MarianMT Pre-trained Model}
-    D --> E[Fine-Tuned Kokas Model]
-    E -->|Inference| F[Translated Text]
+    A["Raw Corpus (Indonesian-Kokas)"] -->|Preprocessing| B["Cleaned Pairs"]
+    B -->|Tokenization| C["Token IDs"]
+    C -->|Fine-Tuning| D{"MarianMT Pre-trained Model"}
+    D --> E["Fine-Tuned Kokas Model"]
+    E -->|Inference| F["Translated Text"]
 ```
 
 ### B. Data Collection and Preparation
@@ -54,7 +54,7 @@ We employed the standard Transformer architecture [1]. The core component is the
 The attention function is computed on a set of queries ($Q$), keys ($K$), and values ($V$):
 
 $$
-\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V
+\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_{k}}}\right)V
 $$
 
 Where $d_k$ is the dimension of the keys. This mechanism is applied in parallel as **Multi-Head Attention**, allowing the model to jointly attend to information from different representation subspaces at different positions.
@@ -63,7 +63,7 @@ Where $d_k$ is the dimension of the keys. This mechanism is applied in parallel 
 The training process aims to minimize the Cross-Entropy Loss between the predicted probability distribution and the ground truth target tokens. For a target sequence $Y = (y_1, ..., y_T)$ given an input $X$, the loss function $\mathcal{L}$ is defined as:
 
 $$ 
-\mathcal{L} = - \sum_{t=1}^{T} \log P(y_t | y_{<t}, X; \theta) 
+\mathcal{L} = - \sum_{t=1}^{T} \log P(y_t \mid y_{<t}, X; \theta) 
 $$ 
 
 Where $\theta$ represents the model parameters. By initializing $\theta$ with weights from `opus-mt-id-en`, the optimization process starts from a point of high linguistic competence in Indonesian, requiring fewer steps to converge on the Kokas translation task.
@@ -76,7 +76,7 @@ The experiments were conducted using the PyTorch framework and Hugging Face Tran
 *   **Hyperparameters**:
     *   Epochs: 100
     *   Batch Size: 16
-    *   Optimizer: AdamW ($eta_1=0.9, \beta_2=0.999$)
+    *   Optimizer: AdamW ($\beta_1=0.9, \beta_2=0.999$)
     *   Learning Rate: $2e^{-5}$ (with linear decay)
 
 ### B. Evaluation Metric: BLEU
