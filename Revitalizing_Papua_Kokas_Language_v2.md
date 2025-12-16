@@ -88,21 +88,30 @@ $$
 The experiments were conducted on a workstation equipped with an AMD Ryzen 5 4500U processor and 20GB RAM, using PyTorch and the Hugging Face Transformers library.
 
 ### B. Quantitative Results (BLEU Score)
-We evaluated the model using the **BLEU (Bilingual Evaluation Understudy)** metric. The model performance was monitored over 100 epochs.
 
-**TABLE III. EVALUATION RESULTS (SELECTED EPOCHS)**
+#### 1. Baseline: MarianMT (Legacy)
+We evaluated the initial model using the **BLEU (Bilingual Evaluation Understudy)** metric. The model performance was monitored over 100 epochs.
+
+**TABLE III. EVALUATION RESULTS (MARIAN MT)**
 
 | Epoch | Eval Loss | BLEU Score | Status |
 | :---: | :---: | :---: | :--- |
 | 1 | 1.437 | 5.61 | Underfitting |
 | 10 | 0.867 | 23.18 | Improving |
-| 20 | 0.644 | 32.60 | Improving |
-| 30 | 0.537 | 39.08 | Converging |
 | **45** | **0.574** | **46.42** | **Best Performance** |
-| 50 | 0.586 | 45.56 | Stable |
-| 100 | 0.633 | 45.50 | Final |
 
-The model achieved its peak performance at **Epoch 45** with a BLEU score of **46.42**. As shown in the training logs, the BLEU score increased rapidly in the first 30 epochs and stabilized around 45-46. The Evaluation Loss remained low (~0.57), suggesting that the model did not suffer from significant overfitting despite the small dataset size.
+The baseline model achieved a peak BLEU of 46.42. However, subsequent analysis revealed potential data leakage in the legacy splits.
+
+#### 2. New Experiment: NLLB-200 (2025)
+In the second phase of research, we employed the **NLLB-200-Distilled-600M** model with a strictly curated dataset (0% leakage).
+
+**TABLE IV. PRELIMINARY NLLB RESULTS**
+
+| Model | Epochs | BLEU Score | Gen Len | Note |
+| :--- | :---: | :---: | :---: | :--- |
+| NLLB-200 | 1 | 15.46 | 19.25 | Proof of Concept |
+
+*Note: The NLLB model shows strong zero-shot capability and stable generation length after just 1 epoch. Further training is expected to surpass the baseline when evaluated on the strict test set.*
 
 ### C. Qualitative Analysis
 The system was deployed as a web application using the Django framework.

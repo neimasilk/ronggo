@@ -1,16 +1,17 @@
 # Catatan Migrasi Proyek Bahasa Sekar
 
 **Status Terakhir (16 Des 2025):**
-1.  **Pembersihan:** File Tesis lama dipindah ke `legacy_thesis/`.
-2.  **Dataset:** Data mentah telah diproses menjadi `dataset/master.csv` (dan split train/val/test). Analisis eksplorasi ada di `06_Data_Exploration_Log.md`.
-3.  **Lingkungan:** Percobaan instalasi library Python terhenti karena perlunya Virtual Environment.
+1.  **Selesai:** Migrasi file Tesis lama ke `legacy_thesis/`.
+2.  **Selesai:** Setup Environment Python (Virtualenv + GPU Support) berhasil.
+3.  **Selesai:** Implementasi skrip training NLLB (`train_nllb.py`) sukses dijalankan.
+4.  **Dokumentasi:** Detail teknis eksperimen NLLB dicatat di `07_NLLB_Experiment_Log.md`.
 
 ## Langkah Setup di Komputer Baru (Powerful Machine)
 
-Jalankan perintah berikut secara berurutan di terminal project root:
+**CATATAN:** Setup ini telah dilakukan dan divalidasi pada sesi 16 Des 2025.
 
 ### 1. Setup Environment Python
-Karena kita menggunakan banyak library berat (Torch, Transformers), wajib pakai `venv`:
+Gunakan perintah ini jika perlu mengulang setup di mesin lain:
 
 ```bash
 # 1. Buat Virtual Environment
