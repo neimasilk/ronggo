@@ -1,6 +1,6 @@
 # Revitalizing the Endangered Papua Kokas Language: A Low-Resource NMT Approach using Transformers
 
-**Abstract**—The preservation of indigenous languages is a critical challenge in the digital age, particularly for under-resourced languages like Papua Kokas, spoken in the Fakfak regency of West Papua, Indonesia. This paper presents a Neural Machine Translation (NMT) system designed to facilitate the revitalization of the Papua Kokas language by enabling automatic translation from Indonesian. Utilizing a low-resource NMT approach, we employ Transfer Learning with a Transformer-based architecture. Specifically, we fine-tune the MarianMT model, originally pre-trained on a larger Indonesian-English corpus, using a manually curated dataset of 2,909 Indonesian-Kokas sentence pairs. Our experiments demonstrate the feasibility of this approach, achieving a peak BLEU score of **46.42**, indicating a high degree of translation quality despite limited data availability. The system was further deployed into a web-based application to enable real-time translation, providing a scalable framework for digital preservation of endangered languages.
+**Abstract**—The preservation of indigenous languages is a critical challenge in the digital age, particularly for under-resourced languages like Papua Kokas, spoken in the Fakfak regency of West Papua, Indonesia. This paper presents a Neural Machine Translation (NMT) system designed to facilitate the revitalization of the Papua Kokas language by enabling automatic translation from Indonesian. Utilizing a low-resource NMT approach, we employ Transfer Learning with a Transformer-based architecture. Specifically, we fine-tune the MarianMT model, originally pre-trained on a larger Indonesian-English corpus, using a manually curated dataset of 2,909 Indonesian-Kokas sentence pairs. Our experiments demonstrate the feasibility of this approach, achieving a peak BLEU score of **46.42** with MarianMT. Furthermore, we introduce preliminary benchmarks using the state-of-the-art **NLLB-200** model, establishing a modern baseline for future research. The system was further deployed into a web-based application to enable real-time translation, providing a scalable framework for digital preservation of endangered languages.
 
 **Keywords**—Neural Machine Translation, Low-Resource Languages, Transformers, MarianMT, Papua Kokas, Language Preservation.
 
@@ -61,9 +61,11 @@ We utilized the `MarianTokenizer` associated with the pre-trained model. Preproc
 3.  **Subword Tokenization**: Breaking words into subword units (e.g., *SentencePiece*) to handle agglutinative morphology and rare words effectively.
 
 ### D. Model Configuration
-The model is based on the MarianMT architecture, a efficient C++ implementation of Transformers. We fine-tuned the `Helsinki-NLP/opus-mt-id-en` model. The training parameters were optimized for the small dataset size to prevent overfitting.
 
-**TABLE II. HYPERPARAMETERS**
+#### 1. Phase 1: MarianMT
+The model is based on the MarianMT architecture, a efficient C++ implementation of Transformers. We fine-tuned the `Helsinki-NLP/opus-mt-id-en` model.
+
+**TABLE II. HYPERPARAMETERS (MARIAN)**
 
 | Hyperparameter | Value |
 | :--- | :--- |
@@ -72,9 +74,9 @@ The model is based on the MarianMT architecture, a efficient C++ implementation 
 | **Learning Rate** | $2 \times 10^{-5}$ |
 | **Batch Size** | 16 |
 | **Epochs** | 100 |
-| **Weight Decay** | 0.01 |
-| **Warmup Steps** | 500 |
-| **Loss Function** | Cross-Entropy |
+
+#### 2. Phase 2: NLLB-200 (Modern Architecture)
+To leverage recent advancements in multilingual modeling, we adopted **NLLB-200-Distilled-600M**. This model uses a SentencePiece-based tokenizer with explicit language codes (`ind_Latn` for source).
 
 The loss function $\mathcal{L}$ minimizes the negative log-likelihood of the target tokens $y_t$ given the input $X$ and previous tokens $y_{1:t-1}$:
 
@@ -123,7 +125,9 @@ The model demonstrates the ability to translate common phrases accurately. The u
 
 ## V. CONCLUSION
 
-This research successfully demonstrates the viability of using Transfer Learning with Transformer architectures for extremely low-resource languages. With a dataset of only 2,909 sentences, the fine-tuned MarianMT model achieved a BLEU score of **46.42**. This approach provides a practical roadmap for revitalizing Papua Kokas and other endangered languages in Indonesia. Future work will focus on expanding the corpus and exploring additional evaluation metrics such as TER and METEOR.
+This research successfully demonstrates the viability of using Transfer Learning with Transformer architectures for extremely low-resource languages. With a dataset of only 2,909 sentences, the fine-tuned MarianMT model achieved a BLEU score of **46.42**. This approach provides a practical roadmap for revitalizing Papua Kokas and other endangered languages in Indonesia. 
+
+Current ongoing work involves transitioning to the **NLLB-200** architecture, which has shown promising zero-shot capabilities in our preliminary benchmarks. Future work will focus on full fine-tuning of NLLB and exploring data augmentation techniques to further improve translation fidelity.
 
 ## REFERENCES
 

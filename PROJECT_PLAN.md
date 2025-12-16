@@ -57,10 +57,10 @@ Pecah output menjadi dua jalur berbeda untuk memaksimalkan dampak:
 
 ## 4. Langkah Taktis (To-Do List)
 
-1.  [ ] **Housekeeping:** Jalankan `mkdir legacy_thesis` dan pindahkan file lama (`laporan.pdf`, dll).
-2.  [ ] **Baseline:** Pastikan bisa mereproduksi hasil BLEU score dari data bersih menggunakan script evaluasi yang baru.
-3.  **New Model:** Mulai eksperimen *fine-tuning* model **NLLB-200-Distilled** menggunakan dataset bersih.
-4.  **Publish Data:** Buat akun Hugging Face dan upload dataset.
+1.  [x] **Housekeeping:** Jalankan `mkdir legacy_thesis` dan pindahkan file lama (`laporan.pdf`, dll).
+2.  [x] **Baseline:** Pastikan bisa mereproduksi hasil BLEU score dari data bersih menggunakan script evaluasi yang baru (Benchmarks awal NLLB sudah ada).
+3.  [x] **New Model:** Mulai eksperimen *fine-tuning* model **NLLB-200-Distilled** menggunakan dataset bersih (Script siap, 1 epoch done).
+4.  [ ] **Publish Data:** Buat akun Hugging Face dan upload dataset.
 
 ---
 *Catatan dibuat pada: 15 Desember 2025*
