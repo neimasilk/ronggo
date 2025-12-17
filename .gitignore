@@ -1,3 +1,5 @@
 .venv/
 nllb-sekar-finetuned/
 get-pip.py
+restore_git.sh
+GEMINI_CONTEXT.md
