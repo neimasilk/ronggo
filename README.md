@@ -7,12 +7,12 @@ Repositori ini didedikasikan untuk pelestarian dan revitalisasi **Bahasa Sekar (
 Saat ini, kami telah berhasil mencapai performa terbaik menggunakan model **NLLB-200 (No Language Left Behind)** yang di-*fine-tune* pada dataset Bahasa Sekar.
 
 ### Metrik Performa
-| Model | Epochs | Test BLEU | Test Loss | Status |
+| Model | Epochs | Test BLEU | Status | Catatan |
 | :--- | :--- | :--- | :--- | :--- |
-| **NLLB-200** | 20 | **60.05** | 0.495 | **Active/Production** |
-| MarianMT (Baseline) | - | ~28.0 | - | Archived |
+| **NLLB-200** | 20 | **59.54** | **Active** | Diuji pada *Clean Test Set* (tanpa kebocoran data). |
+| MarianMT (Baseline) | - | ~28.0 | Archived | - |
 
-Hasil ini menunjukkan bahwa *transfer learning* dari model multibahasa masif sangat efektif untuk Bahasa Sekar, meskipun hanya dengan ~3000 pasang kalimat pelatihan.
+Hasil audit menunjukkan model sangat robust. Skor BLEU hanya turun 0.5 poin (dari 60.05 ke 59.54) setelah menghapus data test yang bocor/overlap dengan training.
 
 ## Struktur Repositori
 

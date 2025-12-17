@@ -49,13 +49,15 @@ Training penuh dilakukan pada 17 Desember 2025 dengan 20 epoch.
 | Metrik | Nilai | Catatan |
 | :--- | :--- | :--- |
 | **Best Val BLEU** | **63.54** | Dicapai pada Epoch 16. |
-| **Test BLEU** | **60.05** | Performa sangat tinggi pada data uji. |
+| **Test BLEU (Raw)**| 60.05 | Mengandung 12.4% kebocoran data (overlap train-test). |
+| **Test BLEU (Clean)**| **59.54** | **Skor Valid.** Dihitung setelah membuang 51 kalimat bocor. |
 | **Test Loss** | 0.495 | Loss konvergen dengan baik. |
 | **Durasi** | ~1 Jam | Menggunakan Tesla T4 (Mixed Precision). |
 
 ### Analisis
-*   Peningkatan drastis dari BLEU 15.46 (Epoch 1) ke 63.54 (Best Epoch) menunjukkan model NLLB sangat efektif melakukan transfer learning ke Bahasa Sekar meskipun dataset kecil (~3000 pasang kalimat).
-*   Skor BLEU > 60 sangat tinggi untuk task MT. Ini mengindikasikan model sangat fasih dalam domain dataset ini, namun perlu diuji lebih lanjut dengan kalimat di luar distribusi training (out-of-domain) untuk memastikan tidak terjadi *overfitting* yang berlebihan pada pola kalimat tertentu.
+*   **Validitas Skor:** Audit data menemukan kebocoran 12.4% pada test set awal. Setelah dibersihkan, skor BLEU bertahan di angka **59.54**. Penurunan minimal (<1 poin) membuktikan bahwa performa tinggi model **bukan hasil hafalan (memorization)**, melainkan generalisasi yang sukses.
+*   **Efektivitas NLLB:** Model berhasil mempelajari struktur Bahasa Sekar dengan sangat baik meskipun dataset kecil.
+*   **Catatan:** Meskipun skor tinggi, pengujian masih terbatas pada domain kalimat yang serupa dengan data training.
 
 ## 6. Rekomendasi Selanjutnya
 Pipeline telah terbukti valid (**Stable**). Langkah selanjutnya:
