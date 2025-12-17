@@ -14,6 +14,11 @@ Saat ini, kami telah berhasil mencapai performa terbaik menggunakan model **NLLB
 
 Hasil audit menunjukkan model sangat robust. Skor BLEU hanya turun 0.5 poin (dari 60.05 ke 59.54) setelah menghapus data test yang bocor/overlap dengan training.
 
+### Limitasi Model (PENTING)
+Meskipun skor metrik tinggi, model memiliki keterbatasan signifikan:
+*   **Kalimat Panjang:** Model cenderung gagal (*repetition loop*) jika diberi input kalimat majemuk yang panjang (>15 kata).
+*   **Domain Spesifik:** Sangat efektif untuk percakapan sehari-hari, namun akan banyak melakukan *copy-paste* kata untuk topik modern (teknologi, politik).
+
 ## Struktur Repositori
 
 ```

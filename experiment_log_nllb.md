@@ -57,7 +57,25 @@ Training penuh dilakukan pada 17 Desember 2025 dengan 20 epoch. Evaluasi dilakuk
 2.  **Kualitas Morfologi (chrF++):** Skor chrF++ yang jauh lebih tinggi dari BLEU (79 vs 59) adalah ciri khas model yang baik pada bahasa daerah. Ini menandakan bahwa ketika model "salah", kesalahannya biasanya minor (misal: sinonim atau variasi ejaan) dan bukan halusinasi total.
 3.  **Siap Pakai:** Dengan TER 27.70, model ini sudah sangat layak digunakan sebagai alat bantu penerjemah (*translation aid*) untuk mempercepat dokumentasi bahasa.
 
-## 6. Rekomendasi Selanjutnya
+## 6. Analisis Kelemahan (Stress Test)
+Berdasarkan uji coba dengan kalimat jebakan (*stress test*), ditemukan beberapa perilaku penting:
+
+1.  **Repetition Loop (Fatal):**
+    *   Input: Kalimat majemuk kompleks ("Walaupun hujan turun sangat deras, dia tetap pergi...").
+    *   Output: *"yanak yanak yanak..."* (berulang tanpa henti).
+    *   **Penyebab:** Model *overfit* pada kalimat pendek (SPOK sederhana) di data latih, sehingga gagal menangani struktur ketergantungan jarak jauh (*long-range dependencies*).
+
+2.  **Mekanisme Copying (Positif/Negatif):**
+    *   Input: "Saya sedang memperbaiki komputer yang rusak."
+    *   Output: *"yai sedang ekerjahan komputer yang rusak"*
+    *   **Analisis:** Model pintar menambahkan morfologi Sekar (`ekerjahan`) tapi menyalin kata asing (`komputer`). Ini perilaku yang wajar untuk *low-resource*, namun menunjukkan keterbatasan kosakata.
+
+3.  **Generalisasi Struktur (Positif):**
+    *   Input: "Anjing tidur di atas laut" (Nonsense).
+    *   Output: *"Anjing erwa ami laut nanam."*
+    *   **Analisis:** Model paham tata bahasa, bukan hanya menghafal makna logis.
+
+## 7. Rekomendasi Selanjutnya
 Pipeline telah terbukti valid (**Stable**). Langkah selanjutnya:
 1.  **Inferensi Manual:** Uji coba model dengan kalimat input manual untuk melihat kualitas terjemahan secara kualitatif.
 2.  **Deployment:** Model yang disimpan di folder `nllb-sekar-finetuned/final_model` siap digunakan.
