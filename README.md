@@ -1,38 +1,58 @@
 # Proyek Revitalisasi Bahasa Papua Kokas (Bahasa Sekar)
 
-Repositori ini berisi aset digital, dataset, laporan penelitian, dan draft publikasi ilmiah yang bertujuan untuk mendokumentasikan dan merevitalisasi Bahasa Sekar (dikenal secara lokal sebagai Bahasa Papua Kokas) di Kabupaten Fakfak, Papua Barat. Bahasa ini dikategorikan sebagai *low-resource language* dengan jejak digital yang sangat minim.
+Repositori ini didedikasikan untuk pelestarian dan revitalisasi **Bahasa Sekar (Papua Kokas)** melalui teknologi kecerdasan buatan. Proyek ini berfokus pada pengembangan model *Machine Translation* (MT) untuk bahasa *low-resource* ini.
 
-## Daftar Isi Dokumen
+## Status Terkini: State-of-the-Art (NLLB-200)
 
-Berikut adalah panduan untuk memahami dokumen-dokumen yang ada dalam repositori ini:
+Saat ini, kami telah berhasil mencapai performa terbaik menggunakan model **NLLB-200 (No Language Left Behind)** yang di-*fine-tune* pada dataset Bahasa Sekar.
 
-### 1. Dataset (`/dataset`)
-Ini adalah komponen paling berharga dari repositori ini. Folder ini berisi korpus paralel Bahasa Indonesia - Bahasa Sekar yang telah dibersihkan dan distandarisasi.
-*   **Isi:** Dataset pelatihan, validasi, dan pengujian.
-*   **Metodologi:** Data dikumpulkan melalui metode *Remote Heritage Elicitation*, di mana kalimat stimulus Bahasa Indonesia diberikan kepada penutur jati (generasi tua di Kokas) untuk diterjemahkan secara manual.
-*   **Detail:** Lihat `dataset/README.md` untuk informasi teknis lengkap.
+### Metrik Performa
+| Model | Epochs | Test BLEU | Test Loss | Status |
+| :--- | :--- | :--- | :--- | :--- |
+| **NLLB-200** | 20 | **60.05** | 0.495 | **Active/Production** |
+| MarianMT (Baseline) | - | ~28.0 | - | Archived |
 
-### 2. Laporan Tugas Akhir (`laporan.pdf`)
-*   **Deskripsi:** Dokumen asli skripsi/tugas akhir mahasiswa (Ronggo Haikal, 2024).
-*   **Konteks:** Mahasiswa ini adalah inisiator pengumpulan data. Karena mahasiswa sudah lulus dan sulit dihubungi, dokumen ini menjadi referensi utama mengenai asal-usul data awal.
-*   **Isi:** Menjelaskan proses wawancara, implementasi awal model MarianMT, dan hasil evaluasi BLEU skor pada tahap awal penelitian.
+Hasil ini menunjukkan bahwa *transfer learning* dari model multibahasa masif sangat efektif untuk Bahasa Sekar, meskipun hanya dengan ~3000 pasang kalimat pelatihan.
 
-### 3. Paper Ilmiah (Draft)
+## Struktur Repositori
 
-Terdapat dua draft publikasi yang dikembangkan dari hasil penelitian ini dengan fokus yang berbeda:
+```
+.
+├── dataset/                # Dataset Paralel (Indonesian - Papua Kokas)
+├── train_nllb.py           # Script training utama (NLLB-200)
+├── inference_nllb.py       # Script untuk translasi/inferensi
+├── inference_results_nllb.txt # Contoh hasil output model
+├── experiment_log_nllb.md  # Log detail eksperimen NLLB
+├── archive/                # Dokumentasi lama & log eksperimen terdahulu
+└── nllb-sekar-finetuned/   # (Gitignored) Folder output model & checkpoint
+```
 
-*   **`Revitalizing_Papua_Kokas_Language_v2.md`**
-    *   **Fokus:** Implementasi Teknis & Eksperimen.
-    *   **Isi:** Membahas arsitektur *Transfer Learning* menggunakan MarianMT, konfigurasi *hyperparameter*, dan hasil eksperimen kuantitatif. Ini adalah versi akademis formal dari Laporan TA yang disiapkan untuk konferensi atau jurnal teknik informatika/komputer.
+## Cara Menggunakan
 
-*   **`Paper_Draft_Ghost_Language.md`**
-    *   **Fokus:** Linguistik Komputasional & Metodologi Data.
-    *   **Isi:** Menyoroti fenomena "Ghost Language" (bahasa tanpa jejak digital) dan kegagalan model AI besar (*Large Language Models*) dalam mengenali bahasa ini secara *zero-shot*. Paper ini mengajukan metode *Remote Heritage Elicitation* sebagai solusi novel untuk mengatasi *blind spot* pada AI.
+### 1. Instalasi Dependensi
+Pastikan Anda menggunakan Python 3.10+ dan GPU (disarankan).
+```bash
+pip install transformers datasets evaluate sacrebleu sentencepiece accelerate torch
+```
 
-### 4. Dokumen Lainnya
-*   **`01_Abstract_Intro.md` s.d. `05_Conclusion.md`**: Pecahan bab dari draft paper awal (v1).
-*   **`Review_Report.md`**: Catatan review internal terhadap kualitas dataset dan metodologi.
+### 2. Training (Fine-tuning)
+Untuk melatih ulang model dari awal:
+```bash
+python train_nllb.py
+```
+*Catatan: Proses ini memerlukan GPU (Tesla T4 atau lebih baik) dan memakan waktu sekitar 1 jam untuk 20 epoch.*
 
-## Ringkasan Proyek
+### 3. Inferensi (Menerjemahkan Kalimat)
+Gunakan script inferensi untuk mencoba model yang telah dilatih:
+```bash
+python inference_nllb.py
+```
+Anda dapat mengedit `inference_nllb.py` untuk mengganti kalimat input.
 
-Proyek ini adalah jembatan antara teknologi AI modern dengan pelestarian budaya tradisional. Melalui kolaborasi antara akademisi, mahasiswa diaspora, dan komunitas penutur jati, kami berhasil membangun dataset digital pertama yang valid untuk Bahasa Sekar, membuka jalan bagi pengembangan teknologi bahasa untuk komunitas yang terpinggirkan secara digital.
+## Roadmap & Eksperimen Selanjutnya
+Lihat file [PROJECT_PLAN.md](PROJECT_PLAN.md) untuk roadmap lengkap dan [NEXT_EXPERIMENTS.md](NEXT_EXPERIMENTS.md) untuk ide teknis pengembangan selanjutnya.
+
+## Kredit & Kontak
+*   **Inisiator Data:** Ronggo Haikal
+*   **Maintainer:** Neima Silk
+*   **Lisensi:** MIT / CC-BY-SA (untuk dataset)

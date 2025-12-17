@@ -1,0 +1,29 @@
+Inference Results - NLLB-200 Fine-tuned on Sekar Language
+Date: 2025-12-17
+Model: nllb-sekar-finetuned/final_model
+
+---
+1.
+Input:      saya akan mengambil mobil ke bengkel besok.
+Reference:  obisa eguain mobil ami bengkel utaf
+Prediction: emau eguain mobil ati bengkel utaf
+
+2.
+Input:      berapa lama perjalanan dari sini ke bandara
+Reference:  parlu waktu firas parjalanan afi ege ati lapangan tarbang
+Prediction: parlu waktu firas purnanam afi ige ati lapangan tarbang
+
+3.
+Input:      tolong beri tahu saya cara memesan tiket pesawat secara online
+Reference:  tolong farok ati yai cara afno tiket kapal torbang secara online
+Prediction: tolong farok ati yai cara tafno tiket kapal tarbang adi cara online
+
+4.
+Input:      . apa yang kamu ketahui tentang kebudayaan betawi?
+Reference:  o bare kusafa adi kebudayaan betawi?
+Prediction: o bare kusafa adi mincia betawi sina budaya
+
+5.
+Input:      apa rencanamu untuk akhir pekan ini?
+Reference:  akape adi o rencana akhir pekan ige?
+Prediction: orencana kusafa ami akhir pekan ige

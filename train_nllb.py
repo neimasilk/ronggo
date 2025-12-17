@@ -19,7 +19,7 @@ MAX_INPUT_LENGTH = 128
 MAX_TARGET_LENGTH = 128
 BATCH_SIZE = 16
 LEARNING_RATE = 2e-5
-NUM_EPOCHS = 5
+NUM_EPOCHS = 20
 WEIGHT_DECAY = 0.01
 OUTPUT_DIR = "./nllb-sekar-finetuned"
 
@@ -124,7 +124,14 @@ def main():
 
     # 6. Train
     print("Starting training...")
-    trainer.train()
+    last_checkpoint = None
+    if os.path.isdir(OUTPUT_DIR):
+        checkpoints = [f for f in os.listdir(OUTPUT_DIR) if f.startswith("checkpoint")]
+        if checkpoints:
+            last_checkpoint = True
+            print("Resuming from latest checkpoint...")
+            
+    trainer.train(resume_from_checkpoint=last_checkpoint)
 
     # 7. Evaluate on Test Set
     print("Evaluating on Test Set...")

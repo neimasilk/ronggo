@@ -43,8 +43,22 @@ Training dilakukan selama 1 epoch untuk memvalidasi pipeline (Proof of Concept).
 | **BLEU Score** | **15.46** | Start yang sangat baik. Sebagai perbandingan, model random/untrained biasanya < 1.0. |
 | **Gen Length** | 19.25 | Panjang kalimat hasil generasi stabil dan sesuai dengan rata-rata target. |
 
-## 5. Rekomendasi Selanjutnya
-Pipeline telah terbukti valid (**Stable**). Langkah selanjutnya untuk mencapai performa maksimal (target BLEU > 40):
-1.  **Full Training:** Jalankan `train_nllb.py` dengan `NUM_EPOCHS = 10` atau `20`.
-2.  **Evaluasi:** Bandingkan hasil kualitatif (contoh terjemahan) dengan hasil MarianMT lama.
-3.  **Deployment:** Model yang disimpan di folder `nllb-sekar-finetuned/` siap diload untuk inferensi.
+## 5. Hasil Full Training (20 Epoch)
+Training penuh dilakukan pada 17 Desember 2025 dengan 20 epoch.
+
+| Metrik | Nilai | Catatan |
+| :--- | :--- | :--- |
+| **Best Val BLEU** | **63.54** | Dicapai pada Epoch 16. |
+| **Test BLEU** | **60.05** | Performa sangat tinggi pada data uji. |
+| **Test Loss** | 0.495 | Loss konvergen dengan baik. |
+| **Durasi** | ~1 Jam | Menggunakan Tesla T4 (Mixed Precision). |
+
+### Analisis
+*   Peningkatan drastis dari BLEU 15.46 (Epoch 1) ke 63.54 (Best Epoch) menunjukkan model NLLB sangat efektif melakukan transfer learning ke Bahasa Sekar meskipun dataset kecil (~3000 pasang kalimat).
+*   Skor BLEU > 60 sangat tinggi untuk task MT. Ini mengindikasikan model sangat fasih dalam domain dataset ini, namun perlu diuji lebih lanjut dengan kalimat di luar distribusi training (out-of-domain) untuk memastikan tidak terjadi *overfitting* yang berlebihan pada pola kalimat tertentu.
+
+## 6. Rekomendasi Selanjutnya
+Pipeline telah terbukti valid (**Stable**). Langkah selanjutnya:
+1.  **Inferensi Manual:** Uji coba model dengan kalimat input manual untuk melihat kualitas terjemahan secara kualitatif.
+2.  **Deployment:** Model yang disimpan di folder `nllb-sekar-finetuned/final_model` siap digunakan.
+3.  **Analisis Error:** Cek kalimat dengan loss tertinggi di test set untuk melihat kelemahan model.
