@@ -1,18 +1,21 @@
-# Catatan Migrasi Proyek Bahasa Sekar
+# Catatan Migrasi Proyek Bahasa Sekar (Arsip)
 
-**Status Terakhir (16 Des 2025):**
-1.  **Selesai:** Migrasi file Tesis lama ke `legacy_thesis/`.
-2.  **Selesai:** Setup Environment Python (Virtualenv + GPU Support) berhasil.
-3.  **Selesai:** Implementasi skrip training NLLB (`train_nllb.py`) sukses dijalankan.
-4.  **Dokumentasi:** Detail teknis eksperimen NLLB dicatat di `07_NLLB_Experiment_Log.md`.
+**Status:** Completed & Archived (18 Des 2025)
+**Current Active Plan:** Lihat `PROJECT_PLAN.md`
 
-## Langkah Setup di Komputer Baru (Powerful Machine)
+Dokumen ini merekam proses pemindahan proyek dan setup awal di lingkungan baru. Seluruh langkah di bawah ini telah diselesaikan.
 
-**CATATAN:** Setup ini telah dilakukan dan divalidasi pada sesi 16 Des 2025.
+## Ringkasan Migrasi
+1.  **Arsip Tesis Lama:** Berhasil dipindahkan ke `legacy_thesis/`.
+2.  **Setup Python:** Virtual environment dan library GPU (`torch`, `transformers`, `nllb`) telah terpasang.
+3.  **Baseline Training:** Model NLLB-200 berhasil dilatih (lihat `experiment_log_nllb.md`).
+
+---
+*(Bagian di bawah ini adalah panduan referensi jika perlu setup ulang)*
+
+### Panduan Setup Ulang (Reference Only)
 
 ### 1. Setup Environment Python
-Gunakan perintah ini jika perlu mengulang setup di mesin lain:
-
 ```bash
 # 1. Buat Virtual Environment
 python3 -m venv .venv
@@ -23,26 +26,12 @@ source .venv/bin/activate
 # 3. Upgrade pip
 pip install --upgrade pip
 
-# 4. Install Dependencies (GPU Support)
-# Pastikan install PyTorch versi GPU (CUDA) jika mesin baru mendukung Nvidia CUDA!
-# Cek https://pytorch.org/get-started/locally/ untuk perintah tepatnya, biasanya:
-pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118  # Sesuaikan versi CUDA
-
-# 5. Install Library NLP
-pip install transformers datasets evaluate sacrebleu sentencepiece accelerate scikit-learn protobuf
+# 4. Install Dependencies
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+pip install transformers datasets evaluate sacrebleu sentencepiece accelerate scikit-learn protobuf google-generativeai openai pandas
 ```
 
 ### 2. Verifikasi Instalasi
-Jalankan perintah ini untuk memastikan GPU terdeteksi:
 ```bash
 python3 -c "import torch; print('CUDA Available:', torch.cuda.is_available())"
 ```
-
-### 3. Lanjutkan Eksperimen (Baseline Model)
-Kita siap membuat skrip training. Tugas selanjutnya adalah membuat file `train_nllb.py` dengan konfigurasi:
-*   **Model:** `facebook/nllb-200-distilled-600M`
-*   **Src Lang:** `ind_Latn` (Indonesian)
-*   **Tgt Lang:** `eng_Latn` (Placeholder untuk Sekar, atau kita init lang code baru jika perlu, tapi untuk fine-tuning sementara bisa *hijack* lang code yang jarang dipakai).
-*   **Hyperparams:** Batch size besar (karena mesin kuat), Learning rate rendah (2e-5).
-
-*Happy Coding!*
