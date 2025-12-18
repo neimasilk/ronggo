@@ -13,6 +13,7 @@ numpy
 # LLM Integration (New)
 google-generativeai
 openai
+python-dotenv
 
 # Utilities
 protobuf

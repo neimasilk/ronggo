@@ -10,10 +10,14 @@ from typing import List, Dict
 try:
     import google.generativeai as genai
     from openai import OpenAI
+    from dotenv import load_dotenv
 except ImportError:
     print("Error: Missing libraries. Please install them:")
-    print("pip install google-generativeai openai pandas")
+    print("pip install google-generativeai openai pandas python-dotenv")
     exit(1)
+
+# Load environment variables from .env file (if exists, mostly for Local PC)
+load_dotenv()
 
 # Configuration
 DATASET_PATH = "../train.csv"
@@ -50,9 +54,6 @@ def load_examples(file_path: str, n: int = 10) -> str:
 
 def generate_prompt(examples: str, vocab_list: str, count: int = 10) -> str:
     """Constructs the prompt for the LLM with strict vocabulary constraints."""
-    
-    # Truncate vocab string if too long (though Gemini/DeepSeek can handle large contexts, best to be safe)
-    # But for 4000 words, it's roughly 5-8k tokens. Safe for modern LLMs.
     
     return f"""
 You are a linguistic expert assisting in creating a dataset for the Sekar (Kokas) language of Papua, Indonesia.
@@ -136,16 +137,30 @@ def save_to_csv(data: str, filename: str):
 def main():
     parser = argparse.ArgumentParser(description="Generate synthetic training data using LLMs.")
     parser.add_argument("--provider", choices=["gemini", "deepseek"], required=True, help="LLM Provider to use")
-    parser.add_argument("--key", type=str, required=True, help="API Key (or 'dummy' if dry-run)")
+    parser.add_argument("--key", type=str, help="API Key (Optional if set in .env)")
     parser.add_argument("--count", type=int, default=10, help="Number of sentences to generate per run")
     parser.add_argument("--batch", type=str, default="batch_1.csv", help="Output filename")
     parser.add_argument("--dry-run", action="store_true", help="Print prompt and exit without calling API")
     
     args = parser.parse_args()
     
+    # API Key Logic: Arg > Env > Error
+    api_key = args.key
+    if not api_key and not args.dry_run:
+        if args.provider == "gemini":
+            api_key = os.getenv("GEMINI_API_KEY")
+        elif args.provider == "deepseek":
+            api_key = os.getenv("DEEPSEEK_API_KEY")
+            
+        if not api_key:
+            print(f"Error: API Key for {args.provider} is missing.")
+            print("Provide it via --key argument OR set GEMINI_API_KEY / DEEPSEEK_API_KEY in .env file")
+            return
+
     # 1. Build Dictionary if missing
     if not os.path.exists(VOCAB_PATH):
         print(f"Vocabulary file not found at {VOCAB_PATH}. Please run 'build_dictionary.py' first.")
+        # Optional: Auto-run it? Let's just warn for now to keep steps clear.
         return
 
     print(f"Loading vocabulary from {VOCAB_PATH}...")
@@ -173,9 +188,9 @@ def main():
     print(f"Sending request to {args.provider}...")
     try:
         if args.provider == "gemini":
-            result = generate_with_gemini(args.key, prompt)
+            result = generate_with_gemini(api_key, prompt)
         elif args.provider == "deepseek":
-            result = generate_with_deepseek(args.key, prompt)
+            result = generate_with_deepseek(api_key, prompt)
         
         print("Processing response...")
         save_to_csv(result, args.batch)
