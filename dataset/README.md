@@ -54,6 +54,30 @@ Bahasa Sekar adalah *Low Resource Language* (Bahasa dengan Sumber Daya Rendah).
 2.  **Rekomendasi Model:** Disarankan menggunakan pendekatan *Transfer Learning* (seperti fine-tuning NLLB-200 atau mBART) daripada melatih model dari nol (*from scratch*).
 3.  **Augmentasi:** Dataset ini sangat ideal dijadikan basis untuk *Rule-Based Augmentation* (misal: substitusi kata benda/objek) untuk memperbanyak jumlah data latih.
 
+## Manajemen Data (Gold vs Silver)
+
+Untuk menjaga integritas data penelitian, kami menerapkan pemisahan ketat antara data asli (validasi manusia) dan data hasil augmentasi komputer.
+
+### 1. Data Emas (Gold Standard)
+File `train.csv`, `val.csv`, dan `test.csv` di folder ini adalah **DATA MURNI**.
+*   **Status:** Read-Only (Jangan pernah diedit manual kecuali ada perbaikan error validasi).
+*   **Sumber:** Validasi Penutur Asli.
+*   **Fungsi:** Menjadi acuan kebenaran (Ground Truth).
+
+### 2. Data Perak (Silver / Synthetic)
+Data hasil generasi AI (LLM) disimpan di folder `dataset/synthetic/`.
+*   **Status:** Eksperimental.
+*   **Sumber:** Google Gemini / DeepSeek (dengan pengawasan aturan ketat).
+*   **Fungsi:** Menambah variasi struktur kalimat untuk training.
+
+### 3. Data Latih Gabungan (Augmented)
+Sebelum melakukan training model, data Emas dan Perak digabungkan.
+*   **Script:** Jalankan `python dataset/scripts/combine_datasets.py`.
+*   **Output:** Akan menghasilkan file `dataset/train_augmented.csv`.
+*   **Git Policy:** File ini **DIABAIKAN** oleh Git (`.gitignore`) karena bersifat sementara dan redundan. Jangan pernah meng-commit file ini.
+
+---
+
 ## Sumber Data
 
 Dataset ini dikonsolidasikan dan direstorasi dari proyek penelitian mahasiswa (Ronggo Haikal, 2024) melalui studi kasus dan wawancara mendalam dengan narasumber keluarga di Daerah Kokas.

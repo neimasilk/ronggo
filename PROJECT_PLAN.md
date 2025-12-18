@@ -1,7 +1,7 @@
 # Rencana Proyek: Revitalisasi Bahasa Sekar
 
 Status: **Active**
-Last Updated: 17 Desember 2025
+Last Updated: 18 Desember 2025
 
 ## 1. Fase Persiapan Data (Selesai)
 - [x] Pengumpulan Data (Remote Heritage Elicitation)
@@ -28,17 +28,19 @@ Last Updated: 17 Desember 2025
     - Dataset terlalu kecil (~3200 train) untuk generalisasi struktur kalimat yang rumit.
 
 ## 4. Fase Data Augmentation (Active - Current Focus)
-Fokus: Mengatasi kekurangan data dan isu kalimat kompleks menggunakan Generative AI.
-- [ ] **Setup Pipeline LLM (DeepSeek/Gemini)**
-    - [ ] Buat script `generate_synthetic_llm.py`.
-    - [ ] Desain prompt untuk *Paraphrasing* (SPOK Sederhana -> Majemuk).
-    - [ ] Desain prompt untuk *Translation* (Few-shot prompting dengan data `train.csv`).
-- [ ] **Generasi Data Sintetis**
-    - [ ] Target: +2000-3000 pasangan kalimat baru yang berfokus pada struktur kompleks/majemuk.
-    - [ ] Filtering: Validasi kualitas data sintetis (menggunakan Reverse Translation atau Heuristik).
+Fokus: Mengatasi kekurangan data dan isu kalimat kompleks menggunakan **LLM dengan Strict Constraints**.
+- [x] **Setup Pipeline LLM (Selesai)**
+    - [x] Buat script ekstraktor kamus (`dataset/scripts/build_dictionary.py`).
+    - [x] Buat script generator (`dataset/scripts/generate_synthetic_llm.py`) dengan integrasi Gemini/DeepSeek.
+    - [x] Implementasi **3 Golden Rules**: Complexity, NER Preservation, & Dictionary Fallback (Code Mixing).
+    - [x] Buat script penggabung aman (`dataset/scripts/combine_datasets.py`) agar data asli tidak tertimpa.
+- [ ] **Generasi Data Sintetis (Next Step)**
+    - [ ] Run Generator Batch 1 (Target: 50-100 kalimat untuk validasi manual).
+    - [ ] Run Generator Full Batch (Target: +1000-2000 kalimat).
+    - [ ] Gabungkan dataset (Original + Synthetic).
 - [ ] **Training dengan Data Augmentasi**
-    - [ ] Gabungkan `train.csv` asli dengan data sintetis.
-    - [ ] Fine-tune ulang NLLB-200.
+    - [ ] Fine-tune ulang NLLB-200 dengan `train_augmented.csv`.
+    - [ ] Evaluasi apakah masalah *repetition loop* teratasi.
 
 ## 5. Fase Evaluasi & Deployment (Pending)
 - [ ] Analisis Kualitatif Mendalam (Human Evaluation oleh penutur asli).

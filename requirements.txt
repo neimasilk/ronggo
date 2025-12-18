@@ -1,0 +1,18 @@
+# Core NLP & ML
+torch>=2.0.0
+transformers>=4.30.0
+datasets>=2.14.0
+evaluate
+sacrebleu
+sentencepiece
+accelerate
+scikit-learn
+pandas
+numpy
+
+# LLM Integration (New)
+google-generativeai
+openai
+
+# Utilities
+protobuf
