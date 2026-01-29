@@ -1,3 +1,15 @@
 .venv/
 nllb-sekar-finetuned/
 get-pip.py
+.env
+experiments/**/artifacts/
+experiments/**/output_model/
+experiments/**/final_model/
+experiments/**/checkpoint-*/
+__pycache__/
+*.csv
+!dataset/*.csv
+!dataset/scripts/*.csv
+!experiments/EXP-003_DeepSeek_Augmentation/*.csv
+
+

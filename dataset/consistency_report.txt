@@ -1,0 +1,263 @@
+# Laporan Ketidakkonsistenan Dataset
+
+Source: aku suka berjalan-jalan di taman
+  - yai esuka apanpana ami taman
+  - yai sanang apanpana ami taman
+--------------------
+Source: apa genre musik favoritmu
+  - o suka genre musik kusafa
+  - o genre musik favorit kusafa
+--------------------
+Source: apa hobi favoritmu
+  - o hobi favorit kusafa
+  - o suka hobi kusafa
+--------------------
+Source: apa makanan favoritmu
+  - o kumnamin favorit kusafa
+  - osuka anan kusafa
+--------------------
+Source: apa makanan favoritmu dari berbagai daerah di indonesia
+  - o kumnamin favorit kusafa afi berbagai urag ami indonesia
+  - o kumnamin favorit kusafa afi berbagai tompat ami indonesia
+--------------------
+Source: apa rencanamu untuk akhir pekan ini
+  - o rencana kusafa ami akhir pekan ige
+  - akape adi o rencana akhir pekan ige
+--------------------
+Source: apa saja kebiasaan unik di daerahmu
+  - kebiasaan unik kusafa watan ami o tompat
+  - kebiasaan unik kusafa watan ami o urag
+--------------------
+Source: apa yang kamu harapkan dari masa depan indonesia
+  - o mi harap kusafa afi mada depan indonesia
+  - kwai kusafa yang o harapkan afi masa depan indonesia
+--------------------
+Source: apa yang kamu ketahui tentang festival-festival di indonesia
+  - o bare kusafa adi festival-festival ami indonesia
+  - o ketahui kusafa tentang festival-festival ami indonesia
+--------------------
+Source: apa yang kamu ketahui tentang kebudayaan betawi
+  - o bare kusafa tentang mincia betawi sina budaya
+  - o bare kusafa adi kebudayaan betawi
+--------------------
+Source: apa yang kamu ketahui tentang kuliner khas daerahmu
+  - o bare kusafa tentang kuliner khas o tompat asal
+  - o bare kusafa adi kuliner khas o urag
+--------------------
+Source: apa yang kamu ketahui tentang musik kontemporer indonesia
+  - o bare kusafa adi musik kontemporer indonesia
+  - o cara akape adi musik kontemporer indonesia
+--------------------
+Source: apa yang kamu ketahui tentang pahlawan nasional indonesia
+  - o ketahui kusafa tentang pahlawan nasional indonesia
+  - o bare kusafa adi pahlawan nasional indonesia
+--------------------
+Source: apa yang kamu ketahui tentang perkembangan olahraga di indonesia
+  - o bare kusafa adi perkembangan olahraga ami indonesia
+  - o ketahui kusafa tentang pahlawan nasional indonesia
+--------------------
+Source: apa yang kamu ketahui tentang sejarah kota tempat tinggalmu
+  - o bare kusafa adi sejarah kota tompat ami o tampat tinggal
+  - o bare kusafa adi sejarah urag o tompat tinggal
+--------------------
+Source: apa yang kamu ketahui tentang sejarah seni batik di indonesia
+  - o bare kusafa tentang sejarah seni batik ami indonesia
+  - o bare kusafa adi sejarah seni batik ami indonesia
+--------------------
+Source: apa yang kamu ketahui tentang seni tenun di indonesia
+  - o bare kusafa adi semi tenun ami indonesia
+  - o bare kusafa adi seni tenun ami indonesia
+--------------------
+Source: apa yang kamu ketahui tentang seni ukir di indonesia
+  - o bare kusafa tentang seni ukir ami indonesia
+  - o bare kusafa adi seni ukir ami indonesia
+--------------------
+Source: apa yang kamu ketahui tentang sistem transportasi di indonesia
+  - o bare kusafa tentang sistem transportasi ami indonesia
+  - o bare kusafa adi sistem transportasi ami indonesia
+--------------------
+Source: apa yang kamu ketahui tentang tarian tradisional indonesia
+  - o bare kusafa adi tasula tradisional indonesia
+  - o bare kusafa tentang tasula tradisional indonesia
+--------------------
+Source: apa yang kamu ketahui tentang tokoh-tokoh sejarah indonesia
+  - kwai kusafa yang o bare tentang tokoh-tokoh sejarah indonesia
+  - o bare kusafa adi tokoh-tokoh sejarah indonesia
+--------------------
+Source: apa yang kamu ketahui tentang upacara pernikahan adat di indonesia
+  - o bare kusafa tentang upacara afsawa adat ami indonesia
+  - o bare kusafa adi upacara afsawa adat ami indonesia
+--------------------
+Source: apa yang kamu sukai dari alam indonesia
+  - kwai kusafa yang osuka afi alam indonesia
+  - o mi suka kusafa afi alam indonesia
+--------------------
+Source: apa yang kamu sukai dari bahasa daerah di indonesia
+  - omi suka kusafa afi bahasa urag ami indonesia
+  - o mi suka kusafa afi bahasa urag ami indonesia
+--------------------
+Source: apa yang kamu sukai dari keanekaragaman budaya indonesia
+  - o misuka kusafa afi keanekaragaman budaya indonesia
+  - o suka kusafa afi keanekaragaman budaya indonesia
+--------------------
+Source: apa yang kamu sukai dari kerajinan tangan indonesia
+  - kwai kusafa yang o suka afi kerajinan tangan indonesia
+  - o suka kwai kusafa afi kerajinan tangan indonesia
+--------------------
+Source: apa yang kamu sukai dari pakaian adat indonesia
+  - o suka kusafa afi kuminasi adat indonesia
+  - o mi suka kusafa afi kumnasi adat indonesia
+--------------------
+Source: apa yang kamu sukai dari seni lukis di indonesia
+  - o mi suka kusafa afi seni lukis ami indonesia
+  - o suka kusafa afi seni lukis ami indonesia
+--------------------
+Source: apa yang kamu sukai dari upacara adat di daerahmu
+  - o suka kusafa afi upacara adat ami o urag
+  - o mi suka kusafa afi upacara adat ami indonesia
+--------------------
+Source: apa yang membuatmu bangga sebagai orang indonesia
+  - kwai kusafa yang ana o bangga sebagai mincia indonesia
+  - kwai kusafa ana o bangga sebagai mincia indonesia
+--------------------
+Source: apakah kamu suka memasak
+  - o nawan asigait adi afrubir
+  - apakah o suka afrubir kwai
+--------------------
+Source: bagaimana cara kamu berkontribusi pada masyarakat
+  - o cara akape berkontribusi ati masyarakat
+  - akape o cara kontribusi ati masyarakat
+--------------------
+Source: bagaimana cara kamu mendukung kampanye lingkungan di indonesia
+  - o cara akape mendukung kampanye lingkungan ami indonesia
+  - akape cara o mendukung kampanye lingkungan ami indonesia
+--------------------
+Source: bagaimana cara kamu mendukung produk lokal indonesia
+  - o cara akape mendukung produk lokal indonesia
+  - o cara akape mendukung produk urag indonesia
+--------------------
+Source: bagaimana cara kamu menjaga kesehatan di lingkungan tropis
+  - akape cara omi jaga kesehatan ami lingkungan tropis
+  - o cara akape mi jaga kesehatan ami lingkungan tropis
+--------------------
+Source: bagaimana cara kamu merayakan hari besar keagamaan di indonesia
+  - akape adi o cara merayakan hari magen keagamaan ami indonesia
+  - o cara akape merayakan rera magen keagamaan ami indonesia
+--------------------
+Source: bagaimana cara kamu merayakan hari kemerdekaan
+  - o cara akape merayakan hari kemerdekaan
+  - adi cara akape o merayakan hari kemerdekaan
+--------------------
+Source: bagaimana caramu memperkenalkan indonesia ke teman asing
+  - akape o cara mikasi kanal indonesia ati mincia asing
+  - o cara akape memperkenalkan indonesia afi teman asing
+--------------------
+Source: bagaimana caramu mendukung umkm di indonesia
+  - o cara akape mendukung umkm ami indonesia
+  - o pandangan akape tentang pendidikan online ami indonesia
+--------------------
+Source: bagaimana caramu mengembangkan bakat dan minatmu
+  - o cara akape mengembangkan bakat adi o minat
+  - o cara akape mengembangkan o bakat adi o minat
+--------------------
+Source: bagaimana caramu mengenal lebih jauh tentang budaya indonesia
+  - o cara akape mengenal lebih jauh adi budaya indonesia
+  - akape cara o mengenal lebih bair tentang budaya indonesia
+--------------------
+Source: bagaimana caramu menjaga hubungan baik dengan tetangga
+  - o cara akape mi jaga o hubungan kues adi tetangga
+  - o cara akape menjaga hubungan kues adi tetangga
+--------------------
+Source: bagaimana caramu menjaga keberagaman di lingkunganmu
+  - o cara akape menjaga keberagaman ami lingkungan
+  - o cara akape mi jaga keberagaman ami o lingkungan
+--------------------
+Source: bagaimana caramu menjaga kebersihan di lingkungan sekitar
+  - o cara akape mijaga kebersihan ami lingkungan sekitar
+  - o cara akape mi jaga kebersihan lingkungan sekitar
+--------------------
+Source: bagaimana caramu menjaga kesehatan fisik di masa pandemi
+  - o cara akape mijaga kesehatan o fisik ami masa pandemi
+  - o cara akape mijaga o kesehatan fisik ami masa pandemi
+--------------------
+Source: bagaimana caramu merayakan hari raya idul fitri
+  - o cara akape o mua hari raya idul fitri
+  - o cara akape mana hari raya idul fitri
+--------------------
+Source: bagaimana kabar keluargamu
+  - akape okuluarga sina kabar
+  - akape adi o keluarga sina kabar
+--------------------
+Source: bagaimana kamu memandang seni dan budaya di indonesia
+  - akape o memandang seni adi budaya ami indonesia
+  - akape o cara pandang seni adi budaya ami indonesia
+--------------------
+Source: bagaimana pandanganmu tentang fashion di indonesia
+  - o pandangan akape adi fashion ami indonesia
+  - o pendapat akape adi fashion ami indonesia
+--------------------
+Source: bagaimana pandanganmu tentang industri film di indonesia
+  - o pandangan akape adi indonesia film ami indonesia
+  - o pandangan akape adi industri film ami indonesia
+--------------------
+Source: bagaimana pandanganmu tentang pendidikan online di indonesia
+  - o pandangan akape tentang pendidikan online ami indonesia
+  - o pandangan akape adi pendidikan online ami indonesia
+--------------------
+Source: bagaimana pandanganmu tentang penggunaan media sosial di indonesia
+  - o pendapat akape adi penggunaan media sosial ami indonesia
+  - o pandangan akape adi penggunaan media sosial ami indonesia
+--------------------
+Source: bagaimana pandanganmu tentang penggunaan teknologi dalam pendidikan
+  - o pendapat akape adi penggunaan teknologi ami pendidikan nanam
+  - o pandangan akape adi penggunaan teknologi ami pendidikan nanam
+--------------------
+Source: bagaimana pandanganmu tentang perkembangan e-commerce di indonesia
+  - o pandangan akape adi perkembangan e-commerce ami indonesia
+  - o pendapat akape adi perkembangan e-commerce ami indonesia
+--------------------
+Source: bagaimana pandanganmu tentang teknologi di indonesia
+  - akape adi o pandangan tentang teknologi ami indonesia
+  - o pandangan akape adi teknologi ami indonesia
+--------------------
+Source: bagaimana pendapatmu tentang film dan sinetron indonesia
+  - o pendapat akape adi film adi sinetron indonesia
+  - o pendapat akape tentang film adi sinetron indonesia
+--------------------
+Source: bagaimana pendapatmu tentang musik klasik
+  - opendapat akape adi musik klasik
+  - o pendapat akape adi musik klasik
+--------------------
+Source: bagaimana pendapatmu tentang perkembangan industri kreatif di indonesia
+  - o pandangan akape tentang perkembangan industri kreatif ami indonesia
+  - o pendapat akape adi perkembangan industri kreatif ami indonesia
+--------------------
+Source: bagaimana pendapatmu tentang perkembangan literasi di indonesia
+  - o pendapat akape adi perkembangan literasi ami indonesia
+  - o pendapat akape tentang perkembangan literasi ami indonesia
+  - o pendapat akape adi perkembangan seni pertunjukkan ami indonesia
+--------------------
+Source: bagaimana pendapatmu tentang seni rupa di indonesia
+  - akape o pendapat tentang seni rupa ami indonesia
+  - o pendapat akape adi seni rupa ami indonesia
+--------------------
+Source: bagaimana pendapatmu tentang tren fashion saat ini
+  - opendapat akape adi tren fasion saat ige
+  - akape adi o pendapat tentang tren fashion saat ige
+--------------------
+Source: kamu suka menonton pertandingan olahraga
+  - o suka mifogin pertandingan olahraga
+  - o suka fogim pertandingan olahraga
+--------------------
+Source: kamu suka menonton pertandingan olahraga?
+  - o suka mifogin pertandingan olahraga?
+  - osuka mafogim pertandingan olahraga
+--------------------
+Source: kegiatan gotong royong dan proyek kebersihan mengajarkan nilai-nilai tanggung jawab sosial di sekolah
+  - tana gotong royong adi proyek ta barsih tana nilai tanggungjawab sosial ami sakolah
+  - tana gotong royong adi proyek ta barsih tana nilai tanggung jawab sosial ami sakolah
+--------------------
+Source: program literasi membantu meningkatkan kemampuan membaca dan menulis siswa
+  - program literasi abantu ati barik siswa sina kemampuan abaca
+  - program magang ati barik pengalaman kerjanya buat kapiropir sina
+--------------------

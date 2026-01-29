@@ -2,60 +2,52 @@
 
 Repositori ini didedikasikan untuk pelestarian dan revitalisasi **Bahasa Sekar (Papua Kokas)** melalui teknologi kecerdasan buatan. Proyek ini berfokus pada pengembangan model *Machine Translation* (MT) untuk bahasa *low-resource* ini.
 
-## Status Terkini: State-of-the-Art (NLLB-200)
+## Status Terkini: Validasi & Augmentasi (NLLB-200)
 
-Saat ini, kami telah berhasil mencapai performa terbaik menggunakan model **NLLB-200 (No Language Left Behind)** yang di-*fine-tune* pada dataset Bahasa Sekar.
+Model terbaik saat ini menggunakan **NLLB-200** dengan skor BLEU **59.54**. Namun, audit terbaru (EXP-002) menunjukkan bahwa skor ini dipengaruhi oleh **tingginya overlap frasa** antara data train dan test. Fokus saat ini bergeser ke peningkatan kualitas dan variasi data.
 
 ### Metrik Performa
-| Model | Epochs | Test BLEU | Status | Catatan |
-| :--- | :--- | :--- | :--- | :--- |
-| **NLLB-200** | 20 | **59.54** | **Active** | Diuji pada *Clean Test Set* (tanpa kebocoran data). |
-| MarianMT (Baseline) | - | ~28.0 | Archived | - |
-
-Hasil audit menunjukkan model sangat robust. Skor BLEU hanya turun 0.5 poin (dari 60.05 ke 59.54) setelah menghapus data test yang bocor/overlap dengan training.
-
-### Limitasi Model (PENTING)
-Meskipun skor metrik tinggi, model memiliki keterbatasan signifikan:
-*   **Kalimat Panjang:** Model cenderung gagal (*repetition loop*) jika diberi input kalimat majemuk yang panjang (>15 kata).
-*   **Domain Spesifik:** Sangat efektif untuk percakapan sehari-hari, namun akan banyak melakukan *copy-paste* kata untuk topik modern (teknologi, politik).
+| Model | Test BLEU | Status | Catatan |
+| :--- | :--- | :--- | :--- |
+| **NLLB-200** | **59.54** | **Active** | *High Overlap Warning*. Sedang divalidasi ulang dengan dataset hasil augmentasi. |
+| MarianMT | ~28.0 | Archived | Baseline awal. |
 
 ## Struktur Repositori
 
 ```
 .
-├── dataset/                # Dataset Paralel (Indonesian - Papua Kokas)
-├── train_nllb.py           # Script training utama (NLLB-200)
-├── inference_nllb.py       # Script untuk translasi/inferensi
-├── inference_results_nllb.txt # Contoh hasil output model
-├── experiment_log_nllb.md  # Log detail eksperimen NLLB
-├── archive/                # Dokumentasi lama & log eksperimen terdahulu
-└── nllb-sekar-finetuned/   # (Gitignored) Folder output model & checkpoint
+├── dataset/                # Dataset Paralel (Indonesian - Papua Kokas) [READ-ONLY]
+├── experiments/            # Folder Eksperimen Terisolasi
+│   ├── EXP-001.../         # Log Fine-tuning NLLB Baseline
+│   ├── EXP-002.../         # Analisis N-Gram Overlap (Data Audit)
+│   └── EXP-003.../         # Augmentasi Data dengan DeepSeek LLM
+├── nllb-sekar-finetuned/   # (Gitignored) Folder output model & checkpoint
+├── EXPERIMENT_REGISTRY.md  # Indeks seluruh eksperimen
+├── PROJECT_PLAN.md         # Roadmap proyek
+└── train_nllb.py           # Script training utama
 ```
 
 ## Cara Menggunakan
 
 ### 1. Instalasi Dependensi
-Pastikan Anda menggunakan Python 3.10+ dan GPU (disarankan).
+Pastikan Python 3.10+ terinstall.
 ```bash
-pip install transformers datasets evaluate sacrebleu sentencepiece accelerate torch
+pip install transformers datasets evaluate sacrebleu sentencepiece accelerate torch openai python-dotenv
 ```
 
-### 2. Training (Fine-tuning)
-Untuk melatih ulang model dari awal:
-```bash
-python train_nllb.py
+### 2. Setup Environment Variables
+Proyek ini menggunakan API DeepSeek untuk augmentasi data. Buat file `.env` di root direktori:
+```env
+DEEPSEEK_API_KEY=sk-....
 ```
-*Catatan: Proses ini memerlukan GPU (Tesla T4 atau lebih baik) dan memakan waktu sekitar 1 jam untuk 20 epoch.*
 
-### 3. Inferensi (Menerjemahkan Kalimat)
-Gunakan script inferensi untuk mencoba model yang telah dilatih:
-```bash
-python inference_nllb.py
-```
-Anda dapat mengedit `inference_nllb.py` untuk mengganti kalimat input.
+### 3. Training & Eksperimen
+*   **Training NLLB:** `python train_nllb.py`
+*   **Inferensi:** `python inference_nllb.py`
+*   **Jalankan Eksperimen Baru:** Lihat `EXPERIMENT_REGISTRY.md` untuk panduan atau buat folder baru di `experiments/`.
 
-## Roadmap & Eksperimen Selanjutnya
-Lihat file [PROJECT_PLAN.md](PROJECT_PLAN.md) untuk roadmap lengkap dan [NEXT_EXPERIMENTS.md](NEXT_EXPERIMENTS.md) untuk ide teknis pengembangan selanjutnya.
+## Roadmap
+Lihat file [PROJECT_PLAN.md](PROJECT_PLAN.md) untuk detail rencana kerja, termasuk strategi augmentasi data sintetik yang sedang berjalan.
 
 ## Kredit & Kontak
 *   **Inisiator Data:** Ronggo Haikal
