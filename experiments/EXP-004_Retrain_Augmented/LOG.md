@@ -1,6 +1,7 @@
 # LOG Eksperimen EXP-004: Retraining with Augmented Data
 
-**Status:** Planned / Ready to Run
+**Status:** Ready to Run
+**Last Updated:** 2 Februari 2026
 **Source Data:** `../EXP-003_DeepSeek_Augmentation/augmented_train_v1.csv`
 
 ## Hipotesis

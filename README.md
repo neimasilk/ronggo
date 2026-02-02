@@ -2,9 +2,11 @@
 
 Repositori ini didedikasikan untuk pelestarian dan revitalisasi **Bahasa Sekar (Papua Kokas)** melalui teknologi kecerdasan buatan. Proyek ini berfokus pada pengembangan model *Machine Translation* (MT) untuk bahasa *low-resource* ini.
 
-## Status Terkini: Validasi & Augmentasi (NLLB-200)
+## Status Terkini: Retraining dengan Data Augmented (NLLB-200)
 
-Model terbaik saat ini menggunakan **NLLB-200** dengan skor BLEU **59.54**. Namun, audit terbaru (EXP-002) menunjukkan bahwa skor ini dipengaruhi oleh **tingginya overlap frasa** antara data train dan test. Fokus saat ini bergeser ke peningkatan kualitas dan variasi data.
+Model baseline menggunakan **NLLB-200** mencapai skor BLEU **59.54** (EXP-001). Audit data (EXP-002) menemukan tingginya overlap frasa (>60%) antara train dan test yang memengaruhi skor. 
+
+**Fase saat ini:** Data augmentation telah selesai (EXP-003), menghasilkan **6,478 pasang kalimat** (2x lipat). Selanjutnya: retraining model dengan dataset augmented (EXP-004) dan pembuatan Hard Test Set (EXP-005) untuk evaluasi yang lebih jujur.
 
 ### Metrik Performa
 | Model | Test BLEU | Status | Catatan |
