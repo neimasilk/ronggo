@@ -1,0 +1,9 @@
+{
+  "model": "Word-based Dictionary",
+  "architecture": "Dictionary Lookup",
+  "bleu": 19.23,
+  "chrf": 48.19,
+  "ter": 55.06,
+  "dictionary_size": 1752,
+  "test_samples": 410
+}

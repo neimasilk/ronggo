@@ -1,0 +1,6 @@
+forrtl: error (200): program aborting due to window-CLOSE event
+Image              PC                Routine            Line        Source             
+libifcoremd.dll    00007FFAE202DF54  Unknown               Unknown  Unknown
+KERNELBASE.dll     00007FFBC1D1D64D  Unknown               Unknown  Unknown
+KERNEL32.DLL       00007FFBC369E8D7  Unknown               Unknown  Unknown
+ntdll.dll          00007FFBC4B8C53C  Unknown               Unknown  Unknown

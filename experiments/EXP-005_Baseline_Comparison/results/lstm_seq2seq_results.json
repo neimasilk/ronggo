@@ -1,0 +1,26 @@
+{
+  "model": "LSTM Seq2Seq",
+  "architecture": "Bidirectional LSTM + Bahdanau Attention",
+  "bleu": 30.74,
+  "chrf": 58.63,
+  "ter": 47.01,
+  "hyperparameters": {
+    "embedding_dim": 256,
+    "hidden_dim": 512,
+    "num_layers": 2,
+    "dropout": 0.3,
+    "batch_size": 32,
+    "learning_rate": 0.001,
+    "total_params": 18319291
+  },
+  "training": {
+    "epochs_run": 15,
+    "best_val_loss": 1.8476132246164174,
+    "final_train_loss": 0.21698270124547622,
+    "final_val_loss": 2.1339950469823985
+  },
+  "vocabulary": {
+    "source_size": 1362,
+    "target_size": 1467
+  }
+}
